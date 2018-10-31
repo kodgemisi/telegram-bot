@@ -1,0 +1,9 @@
+app:
+  telegram-api-token: ${TOKEN}
+  url:
+    send-message: https://api.telegram.org/bot${app.telegram-api-token}/sendMessage
+
+spring:
+  data:
+    mongodb:
+      uri: ${MONGO_URI}
