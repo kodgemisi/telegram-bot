@@ -1,11 +1,8 @@
-package com.kodgemisi.telegramdevbot;
+package com.kodgemisi.telegramdevbot.message;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.User;
-
-import java.util.Optional;
 
 /**
  * Created on October, 2018
@@ -14,15 +11,15 @@ import java.util.Optional;
  */
 @Service
 @Slf4j
-class UserOperationsService {
+class SubscriberService {
 
 	private final SubscriberRepository subscriberRepository;
 
-	private final ApplicationEventPublisher applicationEventPublisher;
+	private final NotificationService notificationService;
 
-	UserOperationsService(SubscriberRepository subscriberRepository, ApplicationEventPublisher applicationEventPublisher) {
+	SubscriberService(SubscriberRepository subscriberRepository, NotificationService notificationService) {
 		this.subscriberRepository = subscriberRepository;
-		this.applicationEventPublisher = applicationEventPublisher;
+		this.notificationService = notificationService;
 	}
 
 	void registerOrActivateUser(User user) {
@@ -36,23 +33,19 @@ class UserOperationsService {
 			final Subscriber existingSubscriber = subscriberRepository.findByTelegramId(user.getId()).get();
 			existingSubscriber.activate();
 			subscriberRepository.save(existingSubscriber);
+			notificationService.sendReactivatedMessage(existingSubscriber);
 			return;
 		}
 
 		final Subscriber subscriber = new Subscriber(user);
 		subscriberRepository.save(subscriber);
-		applicationEventPublisher.publishEvent(new SubscriberRegisteredEvent(subscriber));
+		notificationService.sendActivatedMessage(subscriber);
 	}
 
 	void disableUser(User user) {
 		final Subscriber subscriber = subscriberRepository.findByTelegramId(user.getId()).orElseThrow(IllegalStateException::new);
 		subscriber.disable();
 		subscriberRepository.save(subscriber);
-		applicationEventPublisher.publishEvent(new SubscriberDisabledEvent(subscriber));
-	}
-
-	boolean isAdmin(Integer telegramId) {
-		final Optional<Subscriber> admin = subscriberRepository.findAdminByTelegramId(telegramId);
-		return admin.isPresent();
+		notificationService.sendDisabledMessage(subscriber);
 	}
 }

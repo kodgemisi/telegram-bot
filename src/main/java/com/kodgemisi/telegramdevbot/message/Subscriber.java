@@ -1,4 +1,4 @@
-package com.kodgemisi.telegramdevbot;
+package com.kodgemisi.telegramdevbot.message;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -31,7 +31,7 @@ public class Subscriber {
 	public Subscriber() {
 	}
 
-	public Subscriber(User user) {
+	Subscriber(User user) {
 		this.firstName = user.getFirstName();
 		this.lastName = user.getLastName();
 		this.userName = user.getUserName();

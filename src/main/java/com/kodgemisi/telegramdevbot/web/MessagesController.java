@@ -1,5 +1,7 @@
-package com.kodgemisi.telegramdevbot;
+package com.kodgemisi.telegramdevbot.web;
 
+import com.kodgemisi.telegramdevbot.message.MessageService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 @RequestMapping("/messages")
+@Profile("dev")
 class MessagesController {
 
 	private final MessageService messageService;
@@ -26,7 +29,7 @@ class MessagesController {
 
 		//FIXME require user authentication for this end point
 
-		messageService.sendMessageTo(text, id);
+		messageService.sendMessage(text, Integer.valueOf(id));
 
 		return ResponseEntity.ok().build();
 	}

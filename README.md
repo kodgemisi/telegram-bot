@@ -2,6 +2,14 @@
 
 https://telegram.me/JavaFeedBot
 
+# Deployment
+
+Following environment variables are required:
+
+* `BASE_URL` - **without a trailing slash**
+* `TOKEN` - 
+* `MONGO_URI`
+
 # Development Resources
 
 * [Bot Samples](https://core.telegram.org/bots/samples)

@@ -1,9 +1,15 @@
 app:
+  base-url: ${BASE_URL}
   telegram-api-token: ${TOKEN}
   url:
     send-message: https://api.telegram.org/bot${app.telegram-api-token}/sendMessage
+    edit-markup-message: https://api.telegram.org/bot${app.telegram-api-token}/editMessageReplyMarkup
+    set-webhook: https://api.telegram.org/bot${app.telegram-api-token}/setWebhook
+    webhook-callback: ${app.base-url}/webhook/${app.telegram-api-token}
 
 spring:
   data:
     mongodb:
       uri: ${MONGO_URI}
+  profiles:
+    active: dev

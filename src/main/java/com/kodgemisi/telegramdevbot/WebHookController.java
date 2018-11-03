@@ -1,5 +1,6 @@
 package com.kodgemisi.telegramdevbot;
 
+import com.kodgemisi.telegramdevbot.message.WebHookDispatcher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;

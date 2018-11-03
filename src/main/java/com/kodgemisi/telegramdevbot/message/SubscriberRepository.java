@@ -1,4 +1,4 @@
-package com.kodgemisi.telegramdevbot;
+package com.kodgemisi.telegramdevbot.message;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -13,7 +13,7 @@ public interface SubscriberRepository extends MongoRepository<Subscriber, String
 	Optional<Subscriber> findByTelegramId(Integer id);
 
 	/**
-	 * CAUTION! returned {@link com.kodgemisi.telegramdevbot.Subscriber}s' active fields are false but in reality they are true!
+	 * CAUTION! returned {@link Subscriber}s' active fields are false but in reality they are true!
 	 *
 	 * @return
 	 */
@@ -23,4 +23,9 @@ public interface SubscriberRepository extends MongoRepository<Subscriber, String
 	@Query(value = "{admin: true, telegramId: ?0}", fields = "{telegramId : 1}")
 	Optional<Subscriber> findAdminByTelegramId(Integer id);
 
+	@Query(value = "{admin: true}") // , fields = "{telegramId : 1}"
+	Set<Subscriber> findAllAdmins();
+
+	@Query(value = "{admin: null, active: true}")
+	Set<Subscriber> findAllActiveRegularUsers();
 }

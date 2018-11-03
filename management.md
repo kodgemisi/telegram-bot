@@ -2,6 +2,7 @@
 
 ```
 start - Register for updates
+suggest - Suggest an entry, if it's accepted it'll be sent to everyone
 stop - Disable updates until you give /start command again
 ```
 
