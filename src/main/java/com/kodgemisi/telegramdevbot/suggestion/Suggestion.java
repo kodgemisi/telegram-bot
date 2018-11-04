@@ -56,12 +56,15 @@ public class Suggestion {
 
 	private SuggestionStatus status;
 
-	Suggestion() {
+	private Suggestion() {
 		this.status = SuggestionStatus.PENDING;
 		this.receivedPromptsByAdmins = new HashSet<>();
+		this.suggestionDate = LocalDateTime.now();
 	}
 
-	public Suggestion(Message message) {
+	Suggestion(Message message) {
+		this();
+
 		final String text = message.getText().replace("/suggest ", "").trim();
 
 		if(StringUtils.isBlank(text)) {
@@ -102,7 +105,7 @@ public class Suggestion {
 		this.responsibleAdminFullName = admin.getFirstName() + " " + admin.getLastName();
 	}
 
-	void setSuggestionChatMessage(Message message) {
+	private void setSuggestionChatMessage(Message message) {
 		this.suggestionChatMessage = new ChatIdentifier();
 		this.suggestionChatMessage.setChatId(message.getChatId().toString());
 		this.suggestionChatMessage.setMessageId(message.getMessageId().toString());
