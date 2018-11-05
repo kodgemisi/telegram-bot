@@ -1,7 +1,6 @@
 package com.kodgemisi.telegramdevbot.web;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/telegram-login")
-@Profile("dev")
 class AuthenticationController {
 
 	private final String CALL_BACK_URL;
