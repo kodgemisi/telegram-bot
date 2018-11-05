@@ -1,11 +1,17 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Java Dev Feed Telegram Bot</title>
-    <meta http-equiv="refresh" content="0;https://telegram.me/JavaFeedBot" />
+    <!--<meta http-equiv="refresh" content="0;https://telegram.me/JavaFeedBot" />-->
 </head>
 <body>
 
     <a href="https://telegram.me/JavaFeedBot">JavaFeedBot</a>
+
+    <div sec:authorize="isAuthenticated()">
+        <form th:action="@{/logout}"  method="post">
+            <button>Logout</button>
+        </form>
+    </div>
 
 </body>
 </html>

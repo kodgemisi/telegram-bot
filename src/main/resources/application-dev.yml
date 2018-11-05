@@ -1,2 +1,3 @@
 logging.level:
   org.springframework.web.client.RestTemplate: debug
+  org.springframework.security: debug
