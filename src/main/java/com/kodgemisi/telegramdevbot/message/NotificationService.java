@@ -24,7 +24,7 @@ public class NotificationService {
 	}
 
 	public void sendValidationErrorToSuggester(Integer suggesterId) {
-		messageService.sendMessage("You can only suggest a URL!", suggesterId);
+		messageService.sendMessage("You can only suggest a URL! Format is:\n/suggest <url>", suggesterId);
 	}
 
 	public void sendSuggestionReceivedNotificationToSuggester(Integer suggesterId) {

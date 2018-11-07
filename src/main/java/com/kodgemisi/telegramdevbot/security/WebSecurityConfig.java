@@ -68,6 +68,8 @@ class WebSecurityConfigPermitedUrls extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		//@formatter:off
 		http
+			.csrf().ignoringAntMatchers("/webhook/**")
+				.and()
 			.authorizeRequests()
 				.anyRequest()
 				.permitAll();
